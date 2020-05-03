@@ -1,0 +1,139 @@
+#Question 1-A
+
+nof_samples=1000
+
+# 2 Dimension
+
+datapoints2=runif(nof_samples*2,-1,1)
+
+Mdatapoints2=matrix(datapoints2,ncol=2)
+
+plot(Mdatapoints2)
+
+euclidian_distance2=sqrt((Mdatapoints2[,1])^2 + (Mdatapoints2[,2])^2)
+
+is_in_hypersphere2=euclidian_distance2<=1
+
+nof_hypersphere2=sum(is_in_hypersphere2)
+
+# 3 Dimension
+
+datapoints3=runif(nof_samples*3,-1,1)
+
+Mdatapoints3=matrix(datapoints3,ncol=3)
+
+plot(Mdatapoints3)
+
+euclidian_distance3=sqrt((Mdatapoints3[,1])^2 + (Mdatapoints3[,2])^2 + (Mdatapoints3[,3])^2)
+
+is_in_hypersphere3=euclidian_distance3<=1
+
+nof_hypersphere3=sum(is_in_hypersphere3)
+
+# 4 Dimension
+
+datapoints4=runif(nof_samples*4,-1,1)
+
+Mdatapoints4=matrix(datapoints4,ncol=4)
+
+plot(Mdatapoints4)
+
+euclidian_distance4=sqrt((Mdatapoints4[,1])^2 + (Mdatapoints4[,2])^2 + (Mdatapoints4[,3])^2 + (Mdatapoints4[,4])^2)
+
+is_in_hypersphere4=euclidian_distance4<=1
+
+nof_hypersphere4=sum(is_in_hypersphere4)
+
+# 5 Dimension
+
+datapoints5=runif(nof_samples*5,-1,1)
+
+Mdatapoints5=matrix(datapoints5,ncol=5)
+
+plot(Mdatapoints5)
+
+euclidian_distance5=sqrt((Mdatapoints5[,1])^2 + (Mdatapoints5[,2])^2 + (Mdatapoints5[,3])^2 + (Mdatapoints5[,4])^2 + (Mdatapoints5[,5])^2)
+
+is_in_hypersphere5=euclidian_distance5<=1
+
+nof_hypersphere5=sum(is_in_hypersphere5)
+
+# 6 Dimension
+
+datapoints6=runif(nof_samples*6,-1,1)
+
+Mdatapoints6=matrix(datapoints6,ncol=6)
+
+plot(Mdatapoints6)
+
+euclidian_distance6=sqrt((Mdatapoints6[,1])^2 + (Mdatapoints6[,2])^2 + (Mdatapoints6[,3])^2 + (Mdatapoints6[,4])^2 + (Mdatapoints6[,5])^2 + (Mdatapoints6[,6])^2)
+
+is_in_hypersphere6=euclidian_distance6<=1
+
+nof_hypersphere6=sum(is_in_hypersphere6)
+
+# 7 Dimension
+
+datapoints7=runif(nof_samples*7,-1,1)
+
+Mdatapoints7=matrix(datapoints7,ncol=7)
+
+plot(Mdatapoints7)
+
+euclidian_distance7=sqrt((Mdatapoints7[,1])^2 + (Mdatapoints7[,2])^2 + (Mdatapoints7[,3])^2 + (Mdatapoints7[,4])^2 + (Mdatapoints7[,5])^2 + (Mdatapoints7[,6])^2 + (Mdatapoints7[,7])^2)
+
+is_in_hypersphere7=euclidian_distance7<=1
+
+nof_hypersphere7=sum(is_in_hypersphere7)
+
+# 8 Dimension
+
+datapoints8=runif(nof_samples*8,-1,1)
+
+Mdatapoints8=matrix(datapoints8,ncol=8)
+
+plot(Mdatapoints8)
+
+euclidian_distance8=sqrt((Mdatapoints8[,1])^2 + (Mdatapoints8[,2])^2 + (Mdatapoints8[,3])^2 + (Mdatapoints8[,4])^2 + (Mdatapoints8[,5])^2 + (Mdatapoints8[,6])^2 + (Mdatapoints8[,7])^2 + (Mdatapoints8[,8])^2)
+
+is_in_hypersphere8=euclidian_distance8<=1
+
+nof_hypersphere8=sum(is_in_hypersphere8)
+
+# 9 Dimension
+
+datapoints9=runif(nof_samples*9,-1,1)
+
+Mdatapoints9=matrix(datapoints9,ncol=9)
+
+plot(Mdatapoints9)
+
+euclidian_distance9=sqrt((Mdatapoints9[,1])^2 + (Mdatapoints9[,2])^2 + (Mdatapoints9[,3])^2 + (Mdatapoints9[,4])^2 + (Mdatapoints9[,5])^2 + (Mdatapoints9[,6])^2 + (Mdatapoints9[,7])^2 + (Mdatapoints9[,8])^2 + (Mdatapoints9[,9])^2)
+
+is_in_hypersphere9=euclidian_distance9<=1
+
+nof_hypersphere9=sum(is_in_hypersphere9)
+
+# 10 Dimension
+
+datapoints=runif(nof_samples*10,-1,1)
+
+Mdatapoints=matrix(datapoints,ncol=10)
+
+plot(Mdatapoints)
+
+euclidian_distance=sqrt((Mdatapoints7[,1])^2 + (Mdatapoints7[,2])^2 + (Mdatapoints7[,3])^2 + (Mdatapoints7[,4])^2 + (Mdatapoints7[,5])^2 + (Mdatapoints[,6])^2 + (Mdatapoints[,7])^2 + (Mdatapoints[,8])^2 + (Mdatapoints[,9])^2 + (Mdatapoints[,10])^2)
+
+is_in_hypersphere=euclidian_distance<=1
+
+nof_hypersphere10=sum(is_in_hypersphere)
+
+#Question 1-B
+
+estimated_pi_two_dimension=4*nof_hypersphere2/nof_samples
+
+print(estimated_pi_two_dimension)
+
+estimated_pi_three_dimension=(nof_hypersphere3/nof_samples)*8*(3/4)
+
+print(estimated_pi_three_dimension)

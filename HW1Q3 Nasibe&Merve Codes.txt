@@ -1,0 +1,21 @@
+View(ETM58D_Spring20_HW1_q3_Netflix_data)
+
+smalldata <- ETM58D_Spring20_HW1_q3_Netflix_data[1:1000,]
+head(smalldata,5)
+summary(smalldata)
+
+library(data.table)
+df <- as.data.frame(smalldata)
+df[df == 0] <- NA
+head(df,10)
+
+# install.packages("tidyr")
+library(tidyr)
+
+newdata <- replace_na(df,as.list(colMeans(df,na.rm=T)))
+head(newdata,10)
+
+dst <- dist(smalldata)
+dstmx <- as.matrix(dst)
+mds_dst=cmdscale(dstmx,2)
+plot(mds_dst)

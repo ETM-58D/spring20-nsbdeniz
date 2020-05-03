@@ -1,0 +1,6 @@
+View(BostonHousing)
+BostonData <- data.frame(BostonHousing) 
+summary(BostonData)
+cor(BostonData)
+PCA <- princomp(BostonData,cor=T)
+summary(PCA, loadings=T)
