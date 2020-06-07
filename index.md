@@ -8,3 +8,6 @@
 [Here](https://htmlpreview.github.io/?https://github.com/ETM-58D/spring20-nsbdeniz/blob/master/HW2-Question2.html) is my (and Merve's) answers to Homework 1 Question 2
 
 [Here](https://htmlpreview.github.io/?https://github.com/ETM-58D/spring20-nsbdeniz/blob/master/HW1Q3-Nasibe-Merve.html) is my (and Merve's) answers to Homework 1 Question 3
+
+## June 2020
+[Here](https://htmlpreview.github.io/?https://github.com/ETM-58D/spring20-nsbdeniz/blob/master/Nasibe%20-%20Merve%20HW2-3.html) is my (and Merve's) answers to Homework 2&3
