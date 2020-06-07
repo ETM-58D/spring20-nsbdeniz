@@ -1,0 +1,556 @@
+library(readxl)
+
+tuketim <- read_excel("Tuketim.xls")
+
+tuketim <- as.data.frame(tuketim)
+
+train.data = tuketim[1:36480,]
+test.data = tuketim[36481:38400,]
+
+minus48 = tuketim[36433:38352,]
+minus168 = tuketim[36313:38232,]
+
+minus48$Tarih <- NULL
+minus48$Saat <- NULL
+minus168$Tarih <- NULL
+minus168$Saat <- NULL
+
+table <- cbind(test.data,minus48,minus168)
+
+as.data.frame(table)
+
+colnames(table) <- c("Tarih","Saat","Tuketim0","Tuketim48","Tuketim168")
+
+library(dplyr)
+
+mapetable <- mutate(table, mape48 = (abs(Tuketim0-Tuketim48)/Tuketim0)*100 , mape168 = (abs(Tuketim0-Tuketim168)/Tuketim0)*100)
+
+head(mapetable)
+
+colMeans(mapetable[sapply(mapetable, is.numeric)])
+
+# Part b
+
+btrain = tuketim[169:36480,]
+
+bminus48 = tuketim[121:36432,]
+bminus168 = tuketim[1:36312,]
+
+bminus48$Tarih <- NULL
+bminus48$Saat <- NULL
+bminus168$Tarih <- NULL
+bminus168$Saat <- NULL
+
+long_format <- cbind(btrain,bminus48,bminus168)
+
+as.data.frame(long_format)
+
+colnames(long_format) <- c("Date","Hour","Consumption","Lag48","Lag168")
+
+head(long_format)
+
+head(table)
+
+colnames(table) <- c("Date","Hour","Consumption","Lag48","Lag168")
+
+long_format_test = table
+
+head(long_format_test)
+
+train_long_format = long_format[,-c(1,2)]
+
+head(train_long_format)
+
+test_long_format = long_format_test[,-c(1,2)]
+
+head(test_long_format)
+
+lin_mod=lm(Consumption~.,train_long_format)
+predicted=predict(lin_mod,test_long_format)
+plot(test_long_format$Consumption,predicted)
+
+summary(lin_mod)
+
+#part c
+
+require(dplyr)
+
+# Model 0 (00:00)
+
+train_0 = filter(long_format,Hour == "00:00")
+
+train_0 = train_0[,-c(1,2)]
+
+head(train_0)
+
+test_0 = filter(long_format_test, Hour == "00:00")
+
+test_0 = test_0[,-c(1,2)]
+
+head(test_0)
+
+lin_mod_0 = lm(Consumption~.,train_0)
+predicted_0 = predict(lin_mod_0,test_0)
+plot(test_0$Consumption,predicted_0)
+
+summary(lin_mod_0)
+
+# Model 1 (01:00)
+
+train_1 = filter(long_format,Hour == "01:00")
+
+train_1 = train_1[,-c(1,2)]
+
+head(train_1)
+
+test_1 = filter(long_format_test, Hour == "01:00")
+
+test_1 = test_1[,-c(1,2)]
+
+head(test_1)
+
+lin_mod_1 = lm(Consumption~.,train_1)
+predicted_1 = predict(lin_mod_1,test_1)
+plot(test_1$Consumption,predicted_1)
+
+summary(lin_mod_1)
+
+# Model 2 (02:00)
+
+train_2 = filter(long_format,Hour == "02:00")
+
+train_2 = train_2[,-c(1,2)]
+
+head(train_2)
+
+test_2 = filter(long_format_test, Hour == "02:00")
+
+test_2 = test_2[,-c(1,2)]
+
+head(test_2)
+
+lin_mod_2 = lm(Consumption~.,train_2)
+predicted_2 = predict(lin_mod_2,test_2)
+plot(test_2$Consumption,predicted_2)
+
+summary(lin_mod_2)
+
+# Model 3 (03:00)
+
+train_3 = filter(long_format,Hour == "03:00")
+
+train_3 = train_3[,-c(1,2)]
+
+head(train_3)
+
+test_3 = filter(long_format_test, Hour == "03:00")
+
+test_3 = test_3[,-c(1,2)]
+
+head(test_3)
+
+lin_mod_3 = lm(Consumption~.,train_3)
+predicted_3 = predict(lin_mod_3,test_3)
+plot(test_3$Consumption,predicted_3)
+
+summary(lin_mod_3)
+
+# Model 4 (04:00)
+
+train_4 = filter(long_format,Hour == "04:00")
+
+train_4 = train_4[,-c(1,2)]
+
+head(train_4)
+
+test_4 = filter(long_format_test, Hour == "04:00")
+
+test_4 = test_4[,-c(1,2)]
+
+head(test_4)
+
+lin_mod_4 = lm(Consumption~.,train_4)
+predicted_4 = predict(lin_mod_4,test_4)
+plot(test_4$Consumption,predicted_4)
+
+summary(lin_mod_4)
+
+# Model 5 (05:00)
+
+train_5 = filter(long_format,Hour == "05:00")
+
+train_5 = train_5[,-c(1,2)]
+
+head(train_5)
+
+test_5 = filter(long_format_test, Hour == "05:00")
+
+test_5 = test_5[,-c(1,2)]
+
+head(test_5)
+
+lin_mod_5 = lm(Consumption~.,train_5)
+predicted_5 = predict(lin_mod_5,test_5)
+plot(test_5$Consumption,predicted_5)
+
+summary(lin_mod_5)
+
+# Model 6 (06:00)
+
+train_6 = filter(long_format,Hour == "06:00")
+
+train_6 = train_6[,-c(1,2)]
+
+head(train_6)
+
+test_6 = filter(long_format_test, Hour == "06:00")
+
+test_6 = test_6[,-c(1,2)]
+
+head(test_6)
+
+lin_mod_6 = lm(Consumption~.,train_6)
+predicted_6 = predict(lin_mod_6,test_6)
+plot(test_6$Consumption,predicted_6)
+
+summary(lin_mod_6)
+
+# Model 7 (07:00)
+
+train_7 = filter(long_format,Hour == "07:00")
+
+train_7 = train_7[,-c(1,2)]
+
+head(train_7)
+
+test_7 = filter(long_format_test, Hour == "07:00")
+
+test_7 = test_7[,-c(1,2)]
+
+head(test_7)
+
+lin_mod_7 = lm(Consumption~.,train_7)
+predicted_7 = predict(lin_mod_7,test_7)
+plot(test_7$Consumption,predicted_7)
+
+summary(lin_mod_7)
+
+# Model 8 (08:00)
+
+train_8 = filter(long_format,Hour == "08:00")
+
+train_8 = train_8[,-c(1,2)]
+
+head(train_8)
+
+test_8 = filter(long_format_test, Hour == "08:00")
+
+test_8 = test_8[,-c(1,2)]
+
+head(test_8)
+
+lin_mod_8 = lm(Consumption~.,train_8)
+predicted_8 = predict(lin_mod_8,test_8)
+plot(test_8$Consumption,predicted_8)
+
+summary(lin_mod_8)
+
+# Model 9 (09:00)
+
+train_9 = filter(long_format,Hour == "09:00")
+
+train_9 = train_9[,-c(1,2)]
+
+head(train_9)
+
+test_9 = filter(long_format_test, Hour == "09:00")
+
+test_9 = test_9[,-c(1,2)]
+
+head(test_9)
+
+lin_mod_9 = lm(Consumption~.,train_9)
+predicted_9 = predict(lin_mod_9,test_9)
+plot(test_9$Consumption,predicted_9)
+
+summary(lin_mod_9)
+
+# Model 10 (10:00)
+
+train_10 = filter(long_format,Hour == "10:00")
+
+train_10 = train_10[,-c(1,2)]
+
+head(train_10)
+
+test_10 = filter(long_format_test, Hour == "10:00")
+
+test_10 = test_10[,-c(1,2)]
+
+head(test_10)
+
+lin_mod_10 = lm(Consumption~.,train_10)
+predicted_10 = predict(lin_mod_10,test_10)
+plot(test_10$Consumption,predicted_10)
+
+summary(lin_mod_10)
+
+# Model 11 (11:00)
+
+train_11 = filter(long_format,Hour == "11:00")
+
+train_11 = train_11[,-c(1,2)]
+
+head(train_11)
+
+test_11 = filter(long_format_test, Hour == "11:00")
+
+test_11 = test_11[,-c(1,2)]
+
+head(test_11)
+
+lin_mod_11 = lm(Consumption~.,train_11)
+predicted_11 = predict(lin_mod_11,test_11)
+plot(test_11$Consumption,predicted_11)
+
+summary(lin_mod_11)
+
+# Model 12 (12:00)
+
+train_12 = filter(long_format,Hour == "12:00")
+
+train_12 = train_12[,-c(1,2)]
+
+head(train_12)
+
+test_12 = filter(long_format_test, Hour == "12:00")
+
+test_12 = test_12[,-c(1,2)]
+
+head(test_12)
+
+lin_mod_12 = lm(Consumption~.,train_12)
+predicted_12 = predict(lin_mod_12,test_12)
+plot(test_12$Consumption,predicted_12)
+
+summary(lin_mod_12)
+
+# Model 13 (13:00)
+
+train_13 = filter(long_format,Hour == "13:00")
+
+train_13 = train_13[,-c(1,2)]
+
+head(train_13)
+
+test_13 = filter(long_format_test, Hour == "13:00")
+
+test_13 = test_13[,-c(1,2)]
+
+head(test_13)
+
+lin_mod_13 = lm(Consumption~.,train_13)
+predicted_13 = predict(lin_mod_13,test_13)
+plot(test_13$Consumption,predicted_13)
+
+summary(lin_mod_13)
+
+# Model 14 (14:00)
+
+train_14 = filter(long_format,Hour == "14:00")
+
+train_14 = train_14[,-c(1,2)]
+
+head(train_14)
+
+test_14 = filter(long_format_test, Hour == "14:00")
+
+test_14 = test_14[,-c(1,2)]
+
+head(test_14)
+
+lin_mod_14 = lm(Consumption~.,train_14)
+predicted_14 = predict(lin_mod_14,test_14)
+plot(test_14$Consumption,predicted_14)
+
+summary(lin_mod_14)
+
+# Model 15 (15:00)
+
+train_15 = filter(long_format,Hour == "15:00")
+
+train_15 = train_15[,-c(1,2)]
+
+head(train_15)
+
+test_15 = filter(long_format_test, Hour == "15:00")
+
+test_15 = test_15[,-c(1,2)]
+
+head(test_15)
+
+lin_mod_15 = lm(Consumption~.,train_15)
+predicted_15 = predict(lin_mod_15,test_15)
+plot(test_15$Consumption,predicted_15)
+
+summary(lin_mod_15)
+
+# Model 16 (16:00)
+
+train_16 = filter(long_format,Hour == "16:00")
+
+train_16 = train_16[,-c(1,2)]
+
+head(train_16)
+
+test_16 = filter(long_format_test, Hour == "16:00")
+
+test_16 = test_16[,-c(1,2)]
+
+head(test_16)
+
+lin_mod_16 = lm(Consumption~.,train_16)
+predicted_16 = predict(lin_mod_16,test_16)
+plot(test_16$Consumption,predicted_16)
+
+summary(lin_mod_16)
+
+# Model 17 (17:00)
+
+train_17 = filter(long_format,Hour == "17:00")
+
+train_17 = train_17[,-c(1,2)]
+
+head(train_17)
+
+test_17 = filter(long_format_test, Hour == "17:00")
+
+test_17 = test_17[,-c(1,2)]
+
+head(test_17)
+
+lin_mod_17 = lm(Consumption~.,train_17)
+predicted_17 = predict(lin_mod_17,test_17)
+plot(test_17$Consumption,predicted_17)
+
+summary(lin_mod_17)
+
+# Model 18 (18:00)
+
+train_18 = filter(long_format,Hour == "18:00")
+
+train_18 = train_18[,-c(1,2)]
+
+head(train_18)
+
+test_18 = filter(long_format_test, Hour == "18:00")
+
+test_18 = test_18[,-c(1,2)]
+
+head(test_18)
+
+lin_mod_18 = lm(Consumption~.,train_18)
+predicted_18 = predict(lin_mod_18,test_18)
+plot(test_18$Consumption,predicted_18)
+
+summary(lin_mod_18)
+
+# Model 19 (19:00)
+
+train_19 = filter(long_format,Hour == "19:00")
+
+train_19 = train_19[,-c(1,2)]
+
+head(train_19)
+
+test_19 = filter(long_format_test, Hour == "19:00")
+
+test_19 = test_19[,-c(1,2)]
+
+head(test_19)
+
+lin_mod_19 = lm(Consumption~.,train_19)
+predicted_19 = predict(lin_mod_19,test_19)
+plot(test_19$Consumption,predicted_19)
+
+summary(lin_mod_19)
+
+# Model 20 (20:00)
+
+train_20 = filter(long_format,Hour == "20:00")
+
+train_20 = train_20[,-c(1,2)]
+
+head(train_20)
+
+test_20 = filter(long_format_test, Hour == "20:00")
+
+test_20 = test_20[,-c(1,2)]
+
+head(test_20)
+
+lin_mod_20 = lm(Consumption~.,train_20)
+predicted_20 = predict(lin_mod_20,test_20)
+plot(test_20$Consumption,predicted_20)
+
+summary(lin_mod_20)
+
+# Model 21 (21:00)
+
+train_21 = filter(long_format,Hour == "21:00")
+
+train_21 = train_21[,-c(1,2)]
+
+head(train_21)
+
+test_21 = filter(long_format_test, Hour == "21:00")
+
+test_21 = test_21[,-c(1,2)]
+
+head(test_21)
+
+lin_mod_21 = lm(Consumption~.,train_21)
+predicted_21 = predict(lin_mod_21,test_21)
+plot(test_21$Consumption,predicted_21)
+
+summary(lin_mod_21)
+
+# Model 22 (22:00)
+
+train_22 = filter(long_format,Hour == "22:00")
+
+train_22 = train_22[,-c(1,2)]
+
+head(train_22)
+
+test_22 = filter(long_format_test, Hour == "22:00")
+
+test_22 = test_22[,-c(1,2)]
+
+head(test_22)
+
+lin_mod_22 = lm(Consumption~.,train_22)
+predicted_22 = predict(lin_mod_22,test_22)
+plot(test_22$Consumption,predicted_22)
+
+summary(lin_mod_22)
+
+# Model 23 (23:00)
+
+train_23 = filter(long_format,Hour == "23:00")
+
+train_23 = train_23[,-c(1,2)]
+
+head(train_23)
+
+test_23 = filter(long_format_test, Hour == "23:00")
+
+test_23 = test_23[,-c(1,2)]
+
+head(test_23)
+
+lin_mod_23 = lm(Consumption~.,train_23)
+predicted_23 = predict(lin_mod_23,test_23)
+plot(test_23$Consumption,predicted_23)
+
+summary(lin_mod_23)
