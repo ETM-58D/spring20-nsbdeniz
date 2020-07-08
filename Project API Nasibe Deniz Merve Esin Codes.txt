@@ -1,0 +1,101 @@
+library(readxl)
+
+mydata = read_excel("data.xlsx")
+
+head(mydata)
+
+require(dplyr)
+
+# Model 0 (Kulaklik - 6676673)
+
+kulaklik_ini = filter(mydata,product_content_id == "6676673")
+
+kulaklik = filter(kulaklik_ini,day == "7")
+
+kulaklik = kulaklik[,c(4,5,6,7,8)]
+
+lin_mod_0 = lm(sold_count~.,kulaklik)
+
+summary(lin_mod_0)
+
+predicted_0 = predict(lin_mod_0)
+
+predicted_0
+
+#lin_mod_0_test = lm(sold_count~-1+.,kulaklik)
+
+#summary(lin_mod_0_test)
+
+#predicted_0_test = predict(lin_mod_0_test)
+
+#predicted_0_test
+
+# Model 1 (Dis Firçasi - 32939029)
+
+firca_ini = filter(mydata,product_content_id == "32939029")
+
+firca = filter(firca_ini,day == "7")
+
+firca = firca[,c(4,5,6,7,8)]
+
+lin_mod_1 = lm(sold_count~.,firca)
+
+predicted_1 = predict(lin_mod_1)
+
+predicted_1
+
+# Model 2 (Tayt - 31515569)
+
+tayt_ini = filter(mydata,product_content_id == "31515569")
+
+tayt = filter(tayt_ini,day == "7")
+
+tayt = tayt[,c(4,5,6,7,8)]
+
+lin_mod_2 = lm(sold_count~.,tayt)
+
+predicted_2 = predict(lin_mod_2)
+
+predicted_2
+
+# Model 3 (Yüz Temizleyici - 85004)
+
+temiz_ini = filter(mydata,product_content_id == "85004")
+
+temiz = filter(temiz_ini,day == "7")
+
+temiz = temiz[,c(4,5,6,7,8)]
+
+lin_mod_3 = lm(sold_count~.,temiz)
+
+predicted_3 = predict(lin_mod_3)
+
+predicted_3
+
+# Model 4 (Supurge - 7061886)
+
+supurge_ini = filter(mydata,product_content_id == "7061886")
+
+supurge = filter(supurge_ini,day == "7")
+
+supurge = supurge[,c(4,5,6,7,8)]
+
+lin_mod_4 = lm(sold_count~.,supurge)
+
+predicted_4 = predict(lin_mod_4)
+
+predicted_4
+
+# Model 5 (Islak Mendil - 4066298)
+
+islak_ini = filter(mydata,product_content_id == "4066298")
+
+islak = filter(islak_ini,day == "7")
+
+islak = islak[,c(4,5,6,7,8)]
+
+lin_mod_5 = lm(sold_count~.,islak)
+
+predicted_5 = predict(lin_mod_5)
+
+predicted_5
